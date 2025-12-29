@@ -1,0 +1,20 @@
+edition = "2024"  # Ensure your Rust toolchain supports this, otherwise change to "2021"
+max_width = 120
+hard_tabs = true
+use_small_heuristics = "Max"
+
+# Compresses imports: use std::sync::{Arc, Mutex} instead of multiple lines
+imports_granularity = "Crate"
+group_imports = "StdExternalCrate"
+
+# Strict Single-line enforcement
+fn_single_line = true
+struct_lit_single_line = true
+where_single_line = true
+
+# Syntax cleanup
+match_arm_leading_pipes = "Never" # Removes valid but unnecessary '|' at start of match arms
+remove_nested_parens = true
+merge_derives = true
+use_field_init_shorthand = true
+force_explicit_abi = true
