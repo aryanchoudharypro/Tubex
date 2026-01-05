@@ -1,13 +1,13 @@
 use std::sync::{Arc, Mutex};
 
-use wxdragon::{prelude::*, window::Window};
+use wxdragon::prelude::*;
 
 use crate::config::{ConfigManager, CustomCommand};
 
 const RET_OK: i32 = 1;
 const RET_CANCEL: i32 = 0;
 
-fn show_custom_message(parent: &Window, message: &str, caption: &str) -> i32 {
+fn show_custom_message(parent: &impl WxWidget, message: &str, caption: &str) -> i32 {
 	let dialog = Dialog::builder(parent, caption).with_size(300, 150).build();
 	let sizer = BoxSizer::builder(Orientation::Vertical).build();
 	sizer.add(&StaticText::builder(&dialog).with_label(message).build(), 1, SizerFlag::Expand | SizerFlag::All, 10);
@@ -23,7 +23,7 @@ fn show_custom_message(parent: &Window, message: &str, caption: &str) -> i32 {
 	dialog.show_modal()
 }
 
-fn show_command_dialog(parent: &Window, title: &str, command: Option<&CustomCommand>) -> Option<CustomCommand> {
+fn show_command_dialog(parent: &impl WxWidget, title: &str, command: Option<&CustomCommand>) -> Option<CustomCommand> {
 	let dialog = Dialog::builder(parent, title).with_size(400, 200).build();
 	let main_sizer = BoxSizer::builder(Orientation::Vertical).build();
 
@@ -84,7 +84,7 @@ fn show_command_dialog(parent: &Window, title: &str, command: Option<&CustomComm
 	}
 }
 
-pub fn show_config_dialog(parent: &Window, config_manager: Arc<Mutex<ConfigManager>>) {
+pub fn show_config_dialog(parent: &impl WxWidget, config_manager: Arc<Mutex<ConfigManager>>) {
 	let dialog = Dialog::builder(parent, "Configure Custom Commands").with_size(600, 400).build();
 	let main_sizer = BoxSizer::builder(Orientation::Vertical).build();
 	let content_sizer = BoxSizer::builder(Orientation::Horizontal).build();

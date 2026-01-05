@@ -415,6 +415,7 @@ fn main() {
 	});
 }
 
+#[allow(clippy::too_many_arguments)]
 fn handle_download_action(
 	sel_idx: usize,
 	sel: i32,
@@ -423,7 +424,7 @@ fn handle_download_action(
 	cfg: Arc<Mutex<config::ConfigManager>>,
 	tx: mpsc::Sender<AppEvent>,
 	dm: Arc<DownloadManager>,
-	parent: &Window,
+	parent: &impl WxWidget,
 ) {
 	let cmd_str = if sel > 0 {
 		cfg.lock()
@@ -975,7 +976,7 @@ fn start_batch_download(
 	});
 }
 
-fn show_setup_dialog(parent: &Window, (yt_ok, ff_ok): (bool, bool)) -> i32 {
+fn show_setup_dialog(parent: &impl WxWidget, (yt_ok, ff_ok): (bool, bool)) -> i32 {
 	let dialog = Dialog::builder(parent, "Setup Required").with_size(400, 250).build();
 	let sizer = BoxSizer::builder(Orientation::Vertical).build();
 	let mut missing = Vec::new();
@@ -1008,7 +1009,7 @@ fn show_setup_dialog(parent: &Window, (yt_ok, ff_ok): (bool, bool)) -> i32 {
 	dialog.show_modal()
 }
 
-fn show_download_progress(parent: &Window) -> (Dialog, Gauge) {
+fn show_download_progress(parent: &impl WxWidget) -> (Dialog, Gauge) {
 	let dialog = Dialog::builder(parent, "Downloading Tools").with_size(300, 100).build();
 	let sizer = BoxSizer::builder(Orientation::Vertical).build();
 	let gauge = Gauge::builder(&dialog).with_range(100).build();

@@ -35,7 +35,7 @@ fn format_label(f: &Format) -> String {
 	)
 }
 
-pub fn show_options_dialog(parent: &Window, info: &VideoInfo) -> Option<DownloadOptions> {
+pub fn show_options_dialog(parent: &impl WxWidget, info: &VideoInfo) -> Option<DownloadOptions> {
 	let dialog = Dialog::builder(parent, "Download Options").with_size(600, 500).build();
 	let main_sizer = BoxSizer::builder(Orientation::Vertical).build();
 
@@ -134,7 +134,7 @@ pub fn show_options_dialog(parent: &Window, info: &VideoInfo) -> Option<Download
 	})
 }
 
-pub fn show_playlist_dialog(parent: &Window, videos: &[VideoInfo]) -> Option<DownloadOptions> {
+pub fn show_playlist_dialog(parent: &impl WxWidget, videos: &[VideoInfo]) -> Option<DownloadOptions> {
 	if videos.is_empty() {
 		None
 	} else {
@@ -285,7 +285,7 @@ pub fn show_playlist_dialog(parent: &Window, videos: &[VideoInfo]) -> Option<Dow
 	}
 }
 
-pub fn show_channel_action_dialog(parent: &Window) -> Option<String> {
+pub fn show_channel_action_dialog(parent: &impl WxWidget) -> Option<String> {
 	let dialog = Dialog::builder(parent, "Select Channel Tab").with_size(300, 400).build();
 	let sizer = BoxSizer::builder(Orientation::Vertical).build();
 
@@ -323,7 +323,7 @@ pub fn show_channel_action_dialog(parent: &Window) -> Option<String> {
 }
 
 pub fn show_selection_dialog(
-	parent: &Window,
+	parent: &impl WxWidget,
 	title: &str,
 	items: &[String],
 	allow_multiple: bool,

@@ -68,7 +68,7 @@ fn create_multi_select_list(parent: &Panel) -> ListCtrl {
 }
 
 pub fn create_search_tab(
-	parent: &Window,
+	parent: &impl WxWidget,
 	config_manager: Arc<Mutex<ConfigManager>>,
 	tx_app: mpsc::Sender<AppEvent>,
 ) -> (Panel, SearchTabContext) {
